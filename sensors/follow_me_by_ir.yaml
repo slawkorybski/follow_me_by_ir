@@ -1,0 +1,5 @@
+  - platform: follow_me_by_ir
+    name: FollowMe by IR
+    scan_interval: 90
+    ieee: "34:25:b4:ff:fe:32:69:15"
+    temperature_entity_id: sensor.temperature_sensor_2_temperature
