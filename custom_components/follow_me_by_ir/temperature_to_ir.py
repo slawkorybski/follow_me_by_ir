@@ -167,7 +167,7 @@ def build_raw(header, one, zero, gap, bin):
     if gap:
         raw.extend(parse_to_int_list(gap))  # Completes by pushing gap
 
-    print(f"{header}, [{bin}], {gap}")  # Equivalent to the info() function in JS
+    # print(f"{header}, [{bin}], {gap}")  # Equivalent to the info() function in JS
 
     return raw    
 
@@ -198,17 +198,18 @@ def get_temp_command(temperature: float) -> bytes:
     assert -30 <= temperature < 70
     # conversion to int 
     value = round(temperature)
+	# data frame of FollowMe IR command
     byte_array = [0xA4,0x82,0x48,0x7F]
     byte_array.append(value + 1)
-    
     crc = calc_crc(byte_array)
-    #print(f"{crc:02X}")
+    # print(f"{crc:02X}")
     byte_array.append(crc)
     
     return byte_array
     
 def encode_temperature(temperature: float) -> str:
-    
+    '''
+    following declaration of timing variable to be used in next version of build_raw function
     TICK_US = 560
     HEADER_MARK_US = 8 * TICK_US
     HEADER_SPACE_US = 8 * TICK_US
@@ -217,27 +218,24 @@ def encode_temperature(temperature: float) -> str:
     BIT_ZERO_SPACE_US = 1 * TICK_US
     FOOTER_MARK_US = 1 * TICK_US
     FOOTER_SPACE_US = 10 * TICK_US
-    
+    '''
     command = get_temp_command(temperature)
-    #command = [0xA4,0x82,0x48,0x7F,0x16]
+    # command = [0xA4,0x82,0x48,0x7F,0x16] - 21 deg. of Celcius
     # Print as hex values separated by spaces
-    print(" ".join(f"{byte:02X}" for byte in command))  # Output: A5 5A D9 26 F5 0A
-    
+    # print(" ".join(f"{byte:02X}" for byte in command)) 
     binary = hex_to_bin(command)
-    #print(binary)
-    
     neg_command = negate_bytes(command)
-    print(" ".join(f"{byte:02X}" for byte in neg_command))
+    # print(" ".join(f"{byte:02X}" for byte in neg_command))
     neg_binary = hex_to_bin(neg_command)
-    #print(neg_binary)
+    # print(neg_binary)
     
     # Example usage:
     command_raw = build_raw("4497, 4497", "588, 1657", "588, 588", "588,5601", binary)
     neg_command_raw = build_raw("4497, 4497", "588, 1657", "588, 588", "588,5601", neg_binary)
-    print(command_raw + neg_command_raw)
+    # print(command_raw + neg_command_raw)
     
     return encode_ir(command_raw + neg_command_raw)
 
     
-test = encode_temperature(23.8)
-print(test)
+# test = encode_temperature(23.8)
+# print(test)
