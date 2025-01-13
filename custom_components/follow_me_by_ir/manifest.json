@@ -1,10 +1,10 @@
 {
   "domain": "follow_me_by_ir",
   "name": "FollowMe by IR",
-  "documentation": "https://github.com/slawkor/FollowMe_to_IR",
+  "documentation": "https://github.com/slawkorybski/follow_me_by_ir",
   "requirements": [],
   "dependencies": [],
-  "codeowners": [ "@SlawomirRybski" ],
+  "codeowners": [ "@slawkorybski" ],
   "version": "0.0.1",
   "iot_class": "local_polling"
 }
