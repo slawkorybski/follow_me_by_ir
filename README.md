@@ -11,21 +11,14 @@ IR code encoding functionality is heavly inspired on the project:
 2. Copy the `custom_components/follow_me_by_ir` directory into the `custom_components` directory.
 3. Restart Home Assistant.
 
-## Manual Configuration
-Following an example of configuration which should be placed in sensors folder of Home Assistant configuration directory:
+## Configuration
+FollowMe by IR is configured via the GUI. See the HA docs for more details.
+Click the Add Integration button and search for "FollowMe by IR" integration.
 
 ### Example configuration
 
-```yaml
-sensor:
-  - platform: follow_me_by_ir
-    name: FollowMe by IR
-    scan_interval: 60
-    ieee: "34:25:b4:ff:fe:32:69:15"
-    temperature_entity_id: sensor.temperature_sensor_2_temperature
-```
-
 | Parameter | Description |
 | --- | --- | 
+| scan_interval | parameter defining the time interval with which the IR code is sent | 
 | temperature_entity_id | is a entity_id of the temperature sensor |
-| ieee | is a zigbee ieee of Zosung IR Blaster ZS06 (zigbee IR blaster) |
+| ir_blaster_ieee | is a zigbee ieee of Zosung IR Blaster ZS06 (zigbee IR blaster) device |

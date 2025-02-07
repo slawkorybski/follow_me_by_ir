@@ -194,20 +194,18 @@ def negate_bytes(byte_array: bytes) -> bytes:
     """
     return [~byte & 0xFF for byte in byte_array]
     
-def get_temp_command(temperature: float) -> bytes:
+def get_temp_command(temperature: int) -> bytes:
     assert -30 <= temperature < 70
-    # conversion to int 
-    value = round(temperature)
 	# data frame of FollowMe IR command
     byte_array = [0xA4,0x82,0x48,0x7F]
-    byte_array.append(value + 1)
+    byte_array.append(temperature + 1)
     crc = calc_crc(byte_array)
     # print(f"{crc:02X}")
     byte_array.append(crc)
     
     return byte_array
     
-def encode_temperature(temperature: float) -> str:
+def encode_temperature(temperature: int) -> str:
     '''
     following declaration of timing variable to be used in next version of build_raw function
     TICK_US = 560
