@@ -41,7 +41,7 @@ class DeviceUpdateCoordinator(DataUpdateCoordinator):
         """Update the device data."""
         _LOGGER.info(f"DeviceUpdateCoordinator _async_update_data")
         
-        self._device.send_temperature_ir()    
+        await self._device.send_temperature_ir()    
         
     async def set_temperature(self, temperature: str) -> None:
         self._device.set_temperature( temperature ) 

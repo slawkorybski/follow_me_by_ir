@@ -58,9 +58,9 @@ class Device():
             elif self._previous_temperature > current_temperature:
                 trend_up = False
 
-        if trend_up is not None:
-            if trend_up:
-                temperature_to_send = int(current_temperature)
+        #if trend_up is not None:
+            #if trend_up:
+            #    temperature_to_send = int(current_temperature)
             #else:
             #    if current_temperature % 1 > 0.0:
             #        temperature_to_send = int(current_temperature) + 1
@@ -72,7 +72,7 @@ class Device():
         logger.info(f"temperature_to_send: {temperature_to_send}")
         self._temperature = temperature_to_send
         
-    def send_temperature_ir(self) -> None:
+    async def send_temperature_ir(self) -> None:
         try:
             logger.info(f"temperature to send: {self._temperature}")
             logger.info(f"enabled: {self._enabled}")
@@ -98,11 +98,14 @@ class Device():
                 message = f"service_data is {service_data}"
                 logger.info(message)
                 
-                self._hass.async_create_task(
-                    self._hass.services.async_call(
+                await self._hass.services.async_call(
                         "zha", "issue_zigbee_cluster_command", service_data, False
                     ) 
-                )
+                #self._hass.async_create_task(
+                #    self._hass.services.async_call(
+                #        "zha", "issue_zigbee_cluster_command", service_data, False
+                #    ) 
+                #)
                 #self._hass.services.call("zha", "issue_zigbee_cluster_command", service_data, False)  
 
                 self._error = None
