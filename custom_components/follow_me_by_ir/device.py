@@ -58,14 +58,17 @@ class Device():
             elif self._previous_temperature > current_temperature:
                 trend_up = False
 
-        #if trend_up is not None:
-            #if trend_up:
-            #    temperature_to_send = int(current_temperature)
-            #else:
-            #    if current_temperature % 1 > 0.0:
-            #        temperature_to_send = int(current_temperature) + 1
-            #    else:
-            #        temperature_to_send = int(current_temperature)
+        if trend_up is not None:
+            # Summer
+            # if trend_up:
+                # temperature_to_send = int(current_temperature)
+            # else:
+                # if current_temperature % 1 > 0.0:
+                    # temperature_to_send = int(current_temperature) + 1
+                # else:
+                    # temperature_to_send = int(current_temperature)
+            # Winter
+            temperature_to_send = int(current_temperature)
 
         self._previous_temperature = current_temperature
 

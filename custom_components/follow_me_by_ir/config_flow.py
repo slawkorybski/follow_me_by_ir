@@ -73,7 +73,9 @@ class FollowMeOptionsFlow(OptionsFlow):
     """Options flow from Follow Me by IR."""
 
     def __init__(self, config_entry: ConfigEntry) -> None:
-        self.config_entry = config_entry
+        # Store the config entry in a private attribute to avoid assigning
+        # to a read-only property on the base OptionsFlow.
+        self._config_entry = config_entry
 
     async def async_step_init(self, user_input=None) -> FlowResult:
         """Handle the first step of options flow."""
@@ -83,7 +85,7 @@ class FollowMeOptionsFlow(OptionsFlow):
             # Confusingly, data argument in OptionsFlow is passed to async_setup_entry in the options member
             return self.async_create_entry(title=f"{DOMAIN}", data=user_input)
 
-        logger.info(f"FollowMeOptionsFlow data: {self.config_entry.data}, options: {self.config_entry.options}")
+        logger.info(f"FollowMeOptionsFlow data: {self._config_entry.data}, options: {self._config_entry.options}")
 
         OPTIONS_SCHEMA = vol.Schema({
             vol.Required(CONF_SCAN_INTERVAL): vol.All(vol.Coerce(int), vol.Range(min=5, max=180)),
@@ -94,6 +96,6 @@ class FollowMeOptionsFlow(OptionsFlow):
         return self.async_show_form(
             step_id="init",
             data_schema=self.add_suggested_values_to_schema(
-                OPTIONS_SCHEMA, self.config_entry.options
+                OPTIONS_SCHEMA, self._config_entry.options
             ),
         )

@@ -4,6 +4,7 @@
   "documentation": "https://github.com/slawkorybski/follow_me_by_ir",
   "requirements": [],
   "dependencies": [],
+  "after_dependencies": ["zha"],  
   "codeowners": [ "@slawkorybski" ],
   "config_flow": true,
   "version": "0.0.2",
