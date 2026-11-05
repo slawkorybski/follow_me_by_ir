@@ -8,7 +8,6 @@ import voluptuous as vol
 
 from homeassistant.core import Event, EventStateChangedData, HomeAssistant, callback
 from homeassistant.helpers.event import async_track_state_change_event
-from homeassistant.helpers.event import async_track_state_change
 from homeassistant.util import Throttle
 from homeassistant.components.sensor import PLATFORM_SCHEMA, SensorEntity, SensorDeviceClass, SensorStateClass
 from homeassistant.const import STATE_UNAVAILABLE, STATE_UNKNOWN
@@ -160,5 +159,6 @@ class FollowMeIrSensor(DeviceCoordinatorEntity, SensorEntity):
         await super().async_will_remove_from_hass()
 
         logger.info('FollowMeIrSensor async_will_remove_from_hass')        
+
 
 
